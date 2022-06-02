@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<h2 id="computation-of-sha-for-groups-of-order-64-and-p2."><strong>Computation of Sha for groups of order <span class="math inline">\(64\)</span> and <span class="math inline">\(p=2\)</span>.</strong></h2>
+<a href="index.html">Back to index.</a>
+<p>=======================================================</p>
+<p>There are <span class="math inline">\(256\)</span> non-abelian groups of order <span class="math inline">\(64\)</span>. There are <span class="math inline">\(81\)</span> combination(s) of <span class="math inline">\(G, N\)</span> where <span class="math inline">\(G\)</span> is not abelian with nontrivial Sha:</p>
+<ul>
+<li><span class="math inline">\((64,4)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,5)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,13)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,15)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,16)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,17)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,19)\)</span> : <span class="math inline">\(4\)</span>.</li>
+<li><span class="math inline">\((64,22)\)</span> : <span class="math inline">\(4\)</span>.</li>
+<li><span class="math inline">\((64,24)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,25)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,27)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,28)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,29)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,30)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,31)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,36)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,37)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,39)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,40)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,42)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,43)\)</span> : <span class="math inline">\(4\)</span>.</li>
+<li><span class="math inline">\((64,44)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,45)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,46)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,47)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,49)\)</span> : <span class="math inline">\(4\)</span>.</li>
+<li><span class="math inline">\((64,51)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,53)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,54)\)</span> : <span class="math inline">\(4\)</span>.</li>
+<li><span class="math inline">\((64,65)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,84)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,85)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,86)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,87)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,88)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,89)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,92)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,93)\)</span> : <span class="math inline">\(4\)</span>.</li>
+<li><span class="math inline">\((64,94)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,96)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,100)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,103)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,104)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,105)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,107)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,110)\)</span> : <span class="math inline">\(4\)</span>.</li>
+<li><span class="math inline">\((64,111)\)</span> : <span class="math inline">\(4\)</span>.</li>
+<li><span class="math inline">\((64,112)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,113)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,114)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,115)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,116)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,117)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,126)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,127)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,129)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,132)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,142)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,143)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,152)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,154)\)</span> : <span class="math inline">\(4\)</span>.</li>
+<li><span class="math inline">\((64,168)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,172)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,173)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,175)\)</span> : <span class="math inline">\(4\)</span>.</li>
+<li><span class="math inline">\((64,178)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,181)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,184)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,185)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,187)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,188)\)</span> : <span class="math inline">\(4\)</span>.</li>
+<li><span class="math inline">\((64,191)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,194)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,212)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,247)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,248)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,249)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,251)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,252)\)</span> : <span class="math inline">\(4\)</span>.</li>
+<li><span class="math inline">\((64,255)\)</span> : <span class="math inline">\(2\)</span>.</li>
+<li><span class="math inline">\((64,262)\)</span> : <span class="math inline">\(4\)</span>.</li>
+</ul>
+<p>max order of Sha : <span class="math inline">\(4\)</span>.</p>
+<p>==========END==========</p>
+<p>NOTE: We excluded abelian groups for which we know the result exactly.</p>
+</body>
+</html>
