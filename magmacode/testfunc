@@ -1,1 +1,247 @@
+issquare := function(G, H)
+	for h in H do
+		if not IsIdentity(h) then
+			for g in G do
+				if (g*g eq h) then 
+					return true;
+				end if;
+			end for;
+		end if;
+	end for;
+return false;
+end function;
 
+falseinlist := function(l)
+	for ell in l do
+		if not ell then
+			return false;
+		end if;
+	end for;
+return true;
+end function;
+
+testgroup := function(g)
+S := { };
+	for h in NormalSubgroups(g) do
+		if (h`order eq 2) then
+			if (#Complements(g, h`subgroup) eq 0) then
+				S join:={issquare(g, h`subgroup)};
+			else
+				S join:={not issquare(g, h`subgroup)};
+			end if;
+		end if;
+	end for;
+return falseinlist(S);
+end function;
+
+
+ishnotincyclic := function(h, a)
+o := Order(a)-1;
+test := true;
+for i in [1..o] do
+	if (a^i in h) then 
+		test := false;
+	end if;
+end for;
+return test;
+end function;
+
+shasize := function(g, h)
+S := { };	
+Ga, p := AbelianQuotient(g);
+D, f := Dual(Ga);
+count := 0;
+test := false;
+for a in D do
+	if (Order(a) eq 2) then 
+		for b in g do
+			if not(f(p(b), a) eq 0) and (ishnotincyclic(h, b)) then
+				test := true;
+			end if;
+		end for;
+		if not test then 
+			count := count + 1;
+		end if;
+	end if;
+	test := false;
+end for;
+return count+1;
+end function;
+
+itershasize := function(n)
+S := { };
+o := NumberOfSmallGroups(n); 
+for i in [1..o] do
+	print([n, i]);
+	G:= SmallGroup(n, i);
+	if not(IsCyclic(Sylow(G, 2))) then 
+		for H in NormalSubgroups(G) do
+			if (H`order eq 2) then
+				s:= shasize(G, H`subgroup);
+				print(s);
+				S join:= {s};
+				if (s eq 8) then 
+					return "plop";
+				end if;
+				print("-----------");
+			end if;
+		end for;
+	end if;
+	print("===================");
+end for;
+return Max(S);
+end function;
+
+
+itershasizefile := function(n)
+F := "order" cat IntegerToString(n);
+SetOutputFile(F: Overwrite := true);
+Ms := 1;
+o := NumberOfSmallGroups(n); 
+startstri := "**Computation of Sha for groups of order $" cat IntegerToString(n) cat "$ and $p=2$.**\n" cat "---\n" cat"=======================================================\n";
+PrintFile(F, startstri);
+for i in [1..o] do
+	G:= SmallGroup(n, i);
+	if not(IsCyclic(Sylow(G, 2))) and not(IsAbelian(G)) then 
+		for H in NormalSubgroups(G) do
+			if (H`order eq 2) then
+				s:= shasize(G, H`subgroup);
+				if s gt 1 then
+					Ms := Max(s, Ms);
+					stri := "+ $(" cat IntegerToString(n) cat "," cat IntegerToString(i) cat ")$ : $" cat IntegerToString(s) cat "$\n";
+					PrintFile(F, stri);
+				end if;					
+			end if;
+		end for;
+	end if;
+end for;
+endstri:="max order of Sha : $" cat IntegerToString(Ms) cat "$.\n" cat "==========END==========\n\n NOTE: We excluded abelian groups for which we know the result exactly.";
+PrintFile(F, endstri);
+return "Done";
+end function;
+
+
+itershasizefile2 := function(n)
+F := "order" cat IntegerToString(n);
+SetOutputFile(F: Overwrite := true);
+Ms := 1;
+o := NumberOfSmallGroups(n); 
+startstri := "**Computation of Sha for groups of order $" cat IntegerToString(n) cat "$ and $p=2$.**\n" cat "---\n" cat"=======================================================\n";
+stri := "";
+count := 0;
+nonab := 0;
+for i in [1..o] do
+	G:= SmallGroup(n, i);
+	if not(IsAbelian(G)) then 
+		nonab +:= 1;
+		if not(IsCyclic(Sylow(G, 2))) then 
+			for H in NormalSubgroups(G) do
+				if (H`order eq 2) then
+					s:= shasize(G, H`subgroup);
+					if s gt 1 then
+						count +:= 1;
+						Ms := Max(s, Ms);
+						stri cat:= "+ $(" cat IntegerToString(n) cat "," cat IntegerToString(i) cat ")$ : $" cat IntegerToString(s) cat "$.\n";
+					end if;					
+				end if;
+			end for;
+		end if;
+	end if;
+end for;
+startstri cat:= "\n" cat "There are $" cat IntegerToString(nonab) cat "$ non-abelian groups of order $" cat IntegerToString(n) cat "$.\n";
+startstri cat:= "There are $" cat IntegerToString(count) cat "$ combination(s) of $G, N$";
+startstri cat:= " where $G$ is not abelian with nontrivial Sha:\n\n";
+stri cat:="\n" cat "max order of Sha : $" cat IntegerToString(Ms) cat "$.\n" cat "==========END==========\n\n NOTE: We excluded abelian groups for which we know the result exactly.";
+PrintFile(F, startstri cat stri);
+UnsetOutputFile();
+return "Done";
+end function;
+
+
+
+
+itershasizefile3 := function(n)
+F := "order" cat IntegerToString(n) cat "-3";
+SetOutputFile(F: Overwrite := true);
+Ms := 8;
+o := NumberOfSmallGroups(n); 
+sstri := "**Computation of Sha for groups of order $" cat IntegerToString(n) cat "$ and $p=2$, part 2.**\n" cat "---\n" cat"=======================================================\n";
+PrintFile(F, sstri);
+count := 3377;
+nonab := 29615;
+for i in [29633..o] do
+	G:= SmallGroup(n, i);
+	if not(IsAbelian(G)) then 
+		nonab +:= 1;
+		if not(IsCyclic(Sylow(G, 2))) then 
+			for H in NormalSubgroups(G) do
+				if (H`order eq 2) then
+					s:= shasize(G, H`subgroup);
+					if s gt 1 then
+						count +:= 1;
+						Ms := Max(s, Ms);
+						strr := "+ $(" cat IntegerToString(n) cat "," cat IntegerToString(i) cat ")$ : $" cat IntegerToString(s) cat " - numb:$" cat IntegerToString(count) cat "$, max:$" cat IntegerToString(Ms) cat "$ nonabs:$" cat IntegerToString(nonab) cat "$.\n";
+						PrintFile(F, strr);
+					end if;					
+				end if;
+			end for;
+		end if;
+	end if;
+end for;
+PrintFile(F, "\n" cat "There are $" cat IntegerToString(nonab) cat "$ non-abelian groups of order $" cat IntegerToString(n) cat "$.\n");
+strim :="\n" cat "max order of Sha : $" cat IntegerToString(Ms) cat "$.\n" cat "==========END==========\n\n NOTE: We excluded abelian groups for which we know the result exactly.";
+PrintFile(F, strim);
+UnsetOutputFile();
+return "Done";
+end function;
+
+
+
+
+verlagerung := function(g, h, e)
+Reps := Transversal(g, h);
+S := {};
+for r in Reps do
+	for r2 in Reps do
+		elt := (r2^(-1)*e*r);
+		if (elt in h) then 
+			S join:= {elt};
+		end if;
+	end for;
+end for;
+i := Identity(h); 
+for s in S do 
+	i := i*s;
+end for;
+Ha, p := AbelianQuotient(h);
+return p(i);
+end function;
+
+
+
+testingbigsha := function()
+n:= 256;
+F := "testorder" cat IntegerToString(n) cat "-3";
+SetOutputFile(F: Overwrite := true);
+Ms := 8;
+o := NumberOfSmallGroups(n); 
+sstri := "**Test Computation of Sha for groups of order $" cat IntegerToString(n) cat "$ and $p=2$.**\n" cat "---\n" cat"=======================================================\n";
+PrintFile(F, sstri);
+count := 3377;
+nonab := 29615;
+for i in [29633..o] do
+	G:= SmallGroup(n, i);
+	if not(IsAbelian(G)) then
+	PrintFile(F, "==" cat IntegerToString(i) cat "==\n");
+		nonab +:= 1;
+		for H in NormalSubgroups(G) do
+			if (H`order eq 2) then
+				s:= shasize(G,H`subgroup);
+				if s gt 1 then
+				PrintFile(F, s);
+				end if;
+			end if;					
+		end for;
+	end if;
+end for;
+end function;
